@@ -1,0 +1,11 @@
+{
+  "name": "MultiVision",
+  "version": "1.0.0",
+  "description": "Extreme Tech Training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fabio Lombardi",
+  "license": "ISC"
+}
