@@ -9,8 +9,9 @@
   "author": "Fabio Lombardi",
   "license": "ISC",
   "dependencies": {
-    "stylus": "^0.50.0",
+    "body-parser": "~1.0.0",
+    "mongoose": "^3.8.25",
     "morgan": "~1.0.0",
-    "body-parser": "~1.0.0"
+    "stylus": "^0.50.0"
   }
 }
