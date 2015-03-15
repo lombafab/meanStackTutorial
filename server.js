@@ -12,23 +12,29 @@ function compile(str, path) {
     return stylus(str).set('filename', path);
 }
 
-if (env === 'development') {
-    app.set('view engine', 'jade');
-    app.set('views', __dirname + '/server/views');
-    app.set('view engine', 'jade');
-    app.set('views', __dirname + '/server/views');
-    app.use(morgan('dev'));
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(stylus.middleware (
-        {
-            src: __dirname + '/public',
-            compile: compile
-        }
-    ));
-    app.use(express.static(__dirname + '/public'));
-}
+
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/server/views');
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/server/views');
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(stylus.middleware (
+    {
+        src: __dirname + '/public',
+        compile: compile
+    }
+));
+app.use(express.static(__dirname + '/public'));
+
 // MongoDB connect
-mongoose.connect('mongodb://localhost/multivision');
+if (env === 'development') {
+    mongoose.connect('mongodb://localhost/multivision');
+} else {
+    mongoose.connect('mongodb://fabio:multivision@ds035280.mongolab.com:35280/multivision');
+}
+
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, "connection error..."));
 db.once('open', function callback() {
@@ -53,7 +59,7 @@ app.get('*', function (req, res) {
     });
 });
 
-var port = 3030;
+var port = process.env.PORT || 3030;
 
 var server = app.listen(port, function () {
 
